@@ -51,6 +51,6 @@ S3_bucket=arn:aws:s3:us-east-1:925710499357:accesspoint/sourajyoti-accesspoint
 # To copy the files from EC2 to S3
 s3_bucket=arn:aws:s3:us-east-1:925710499357:accesspoint/sourajyoti-accesspoint
 aws s3 cp /tmp/${myname}-httpd-logs-${timestamp}.tar s3://$s3_bucket/${myname}-httpd-logs-${timestamp}.tar
-echo "File moved to S3-bucket"
+echo "File has been moved to S3-bucket"
 
 
