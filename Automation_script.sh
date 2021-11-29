@@ -33,6 +33,17 @@ else
   echo "process is not running"
 fi
 
+#Apache service enable if not started, need to add in code
+enable=$(sudo systemctl is-enabled apache2)
+if [[ $enable=="enabled" ]];then
+        echo " Apache service is enable"
+else
+        echo " Apache service is disable"
+        echo " Enabling Apache service"
+        sudo systemctl enable apache2
+fi
+
+
 #sending logs file to tmp
 sudo find /var/log/apache2/ -type f -name '*.log' -print | while read FILE ; do
     BASENAME=`basename ${FILE} '.log'`
