@@ -64,4 +64,25 @@ s3_bucket=arn:aws:s3:us-east-1:925710499357:accesspoint/sourajyoti-accesspoint
 aws s3 cp /tmp/${myname}-httpd-logs-${timestamp}.tar s3://$s3_bucket/${myname}-httpd-logs-${timestamp}.tar
 echo "File has been moved to S3-bucket"
 
+#Scheduling cron job and creating inventory html file
+inv_file="/var/www/html/inventory.html"
+crn_file="/etc/cron.d/automation"
+timestamp=$(date '+%d%m%Y-%H%M%S')
+file_size=$(stat -c %s /tmp/*.tar)
+
+
+if [ ! -f "$inv_file" ]
+then
+touch "$inv_file"
+echo "Log Type&ensp;&ensp;&ensp;&ensp;Time Created&ensp;&emsp;&emsp;&emsp;Type&ensp;&ensp;&ensp;&emsp;Size&ensp;&ensp;&ensp;&ensp;<br>" >> "$inv_file"
+fi
+echo -e "<br><br>" >> $inv_file
+
+echo "httpd-logs&ensp;&ensp;&ensp;&nbsp;"$timestamp"&ensp;&emsp;&nbsp;&nbsp;tar&ensp;&ensp;&emsp;&emsp;"$file_size"&ensp;&ensp;&ensp;<br>" >> "$inv_file"
+
+if [ ! -f "$crn_file" ]
+then
+touch "$crn_file"
+echo "00 00 * * * root /Automation_Project/Automation_script.sh" > "$crn_file"
+fi
 
