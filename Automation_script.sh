@@ -1,6 +1,6 @@
-# Installing awscli is done
-# sudo apt update
-# sudo apt install awscli
+# Installing awscli
+sudo apt update
+sudo apt install awscli
 
 #my name variable
 myname=sourajyoti
